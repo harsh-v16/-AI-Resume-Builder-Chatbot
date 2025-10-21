@@ -7,7 +7,7 @@ from pdf_util import generate_resume_pdf
 import json
 
 # Load environment variables
-load_dotenv()
+load_dotenv(override=False)
 
 st.set_page_config(page_title="AI Resume Builder", page_icon="🧠", layout="centered")
 st.title("🤖 AI Resume Builder Chatbot")
@@ -146,3 +146,4 @@ if st.session_state.generated_resume:
 
 st.markdown("---")
 st.caption("Built with Streamlit + OpenAI + ReportLab")
+
