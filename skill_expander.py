@@ -4,7 +4,7 @@ from dotenv import load_dotenv
 from openai import OpenAI
 
 load_dotenv()
-client = OpenAI()
+client = OpenAI(api_key=os.getenv("OPENAI_API_KEY"))
 
 def expand_skills(skills: str, target_role: str = "") -> str:
     """
@@ -43,3 +43,4 @@ Return as a comma-separated list only (no sentences).
         if "aws" in ",".join(base):
             extra += ["Docker", "Kubernetes", "Terraform", "CI/CD"]
         return ", ".join(list(dict.fromkeys(extra)))
+
