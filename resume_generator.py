@@ -273,6 +273,7 @@ def generate_resume(user_inputs: dict) -> str:
 
     # --- Force header overwrite every time (fixes stale name/email issue) ---
 # Remove any first-line name/header GPT may have added
+# Remove any first-line name/header GPT may have added
 result = re.sub(r'^[^\n]*\n+', '', result)
 
 # Add our exact header line
@@ -285,6 +286,8 @@ result = re.sub(r'https://(www\.)?linkedin\.com/in/[^\s\)]*', linkedin or '', re
 result = re.sub(r'https://github\.com/[^\s\)]*', github or '', result)
 
 return result
+
+
 
 
 
