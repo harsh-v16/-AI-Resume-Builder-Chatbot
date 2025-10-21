@@ -271,8 +271,20 @@ def generate_resume(user_inputs: dict) -> str:
             # Replace the section text in result
             result = result.replace(edu_text, formatted_edu.strip())
 
-    if header.split("|")[0].strip().lower() not in result.splitlines()[0].lower():
-        result = header + "\n\n" + result
+    # --- Force header overwrite every time (fixes stale name/email issue) ---
+# Remove any first-line name/header GPT may have added
+result = re.sub(r'^[^\n]*\n+', '', result)
 
-    return result
+# Add our exact header line
+result = header + "\n\n" + result
+
+# (Optional cleanup to remove any old cached personal data)
+result = re.sub(r'(?i)shubham\s+shrotriya', name, result)
+result = re.sub(r'shubhamshrotriya[0-9]*@gmail\.com', email, result)
+result = re.sub(r'https://(www\.)?linkedin\.com/in/[^\s\)]*', linkedin or '', result)
+result = re.sub(r'https://github\.com/[^\s\)]*', github or '', result)
+
+return result
+
+
 
